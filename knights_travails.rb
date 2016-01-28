@@ -16,6 +16,38 @@ class KnightMoves
         ]
   end
 
+  def user_input
+
+    draw_the_board
+    puts "Enter starting position:\tFormat: A4"
+
+    result = get_input
+    @start = [result.first, result.last]
+    @board[@start[0]][@start[1]] = 's'
+    draw_the_board
+
+
+    puts "Enter target position:\tFormat: A4"
+    result = get_input
+    @target = [result.first, result.last]
+    @board[@target[0]][@target[1]] = 'f'
+    draw_the_board
+
+    knight_moves
+  end
+
+  def get_input
+    input = gets.upcase.chomp
+    until input.size == 2 && input[0].ord.between?(65,72) && input[1].to_i.between?(1,8)
+      puts "Incorrect input, try again"
+      input = gets.downcase.chomp
+    end
+
+    x = input[0].ord - 65
+    y = input[1].to_i - 1
+    [x,y]
+  end
+
   def draw_the_board
       @board.reverse.each_with_index do |row, i|
         print (i-8).abs
@@ -28,12 +60,6 @@ class KnightMoves
 
   def knight_moves
     found = false
-    @start = [2,3]
-    @goal = [4,6]
-    @board[@start[0]][@start[1]] = 's'
-    @board[@goal[0]][@goal[1]] = 'f'
-    ## updating the board with start point and finish point
-
     @queue = []
 
     @current = Node.new()
@@ -89,23 +115,19 @@ class KnightMoves
     ## converting route steps to readable form
     string = ""
     @route.each { |step|
-      p step
       string << "#{(step[1]+65).chr}#{step[0]+1} "
     }
     string.strip!.gsub!(" "," -> ")
 
-    puts "Winning route, in #{@route.size - 1} steps: #{string}"
+    puts "You made it in #{@route.size - 1} moves!\nHere's your path: #{string}"
     draw_the_board
   end
 
 end
 
 
-
-
-
 game = KnightMoves.new
-game.knight_moves
+game.user_input
 
 
 
