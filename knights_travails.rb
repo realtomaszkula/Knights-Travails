@@ -34,32 +34,81 @@ class KnightMoves
     @board[2][2] = 'x'
 
     queue = []
-    step_seq = []
+    route = []
 
-      # found if @board[x][y] == 'x'
-      # queue << [x, y]
+    route << @start
 
-  end
-
-  def possible_moves
+    loop do
     x, y = @start[0], @start[1]
-    @moves = []
 
-    x += 2; y -= -1
-      moves << [x,y] if x < 7 && y < 7
-    x +=  1; y -=  2
-      moves << [x,y] if x < 7 && y < 7
-    x +=  2; y -=  1
-      moves << [x,y] if x < 7 && y < 7
-    x += -1; y -= -2
-      moves << [x,y] if x < 7 && y < 7
-    x += -2; y -= -1
-      moves << [x,y] if x < 7 && y < 7
-    x += -1; y -=  2
-      moves << [x,y] if x < 7 && y < 7
-    x += -2; y -=  1
-      moves << [x,y] if x < 7 && y < 7
+      a = x + 2; b = y + -1
+      if a < 7 && b < 7
+        if @board[a][b] == "x"
+          found = true
+          break
+        end
+        queue << [a,b]
+      end
+
+      a = x + 1; b = y +  2
+      if a < 7 && b < 7
+        if @board[a][b] == "x"
+          found = true
+          break
+        end
+        queue << [a,b]
+      end
+
+      a = x + 2; b = y +  1
+      if a < 7 && b < 7
+        if @board[a][b] == "x"
+          found = true
+          break
+        end
+        queue << [a,b]
+      end
+
+      a = x + -1; b = y + -2
+      if a < 7 && b < 7
+        if @board[a][b] == "x"
+          found = true
+          break
+        end
+        queue << [a,b]
+      end
+
+      a = x + -2; b = y + -1
+      if a < 7 && b < 7
+        if @board[a][b] == "x"
+          found = true
+          break
+        end
+        queue << [a,b]
+      end
+
+      a = x + -1; b = y +  2
+      if a < 7 && b < 7
+        if @board[a][b] == "x"
+          found = true
+          break
+        end
+        queue << [a,b]
+      end
+
+      a = x + -2; b = y +  1
+      if a < 7 && b < 7
+        if @board[a][b] == "x"
+          found = true
+          break
+        end
+        queue << [a,b]
+      end
+    end
+
+    route << @goal
+
   end
+
 
 end
 
