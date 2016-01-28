@@ -29,92 +29,49 @@ class KnightMoves
   def knight_moves
     @start = [4,3]
     @goal = [2,2]
-
     @board[4][3] = 'o'
     @board[2][2] = 'x'
 
+    current = Node.new(@start)
     @queue = []
-    @route = []
 
-    @route << @start
 
     loop do
     x, y = @start[0], @start[1]
+    possible_routes(x,y)
 
-      a = x + 2; b = y + -1
-      if a < 7 && b < 7
+        new_node = Node.new([a, b], current)
+        current.child = new_node
+
         if @board[a][b] == "x"
-          found = true
-          @route << [a,b]
+          print_winning_route(new_node)
           break
         end
-        @queue << [a,b]
-      end
 
-      a = x + 1; b = y +  2
-      if a < 7 && b < 7
-        if @board[a][b] == "x"
-          found = true
-          @route << [a,b]
-          break
-        end
-        @queue << [a,b]
-      end
-
-      a = x + 2; b = y +  1
-      if a < 7 && b < 7
-        if @board[a][b] == "x"
-          found = true
-          @route << [a,b]
-          break
-        end
-        @queue << [a,b]
-      end
-
-      a = x + -1; b = y + -2
-      if a < 7 && b < 7
-        if @board[a][b] == "x"
-          found = true
-          @route << [a,b]
-          break
-        end
-        @queue << [a,b]
-      end
-
-      a = x + -2; b = y + -1
-      if a < 7 && b < 7
-        if @board[a][b] == "x"
-          found = true
-          @route << [a,b]
-          break
-        end
-        @queue << [a,b]
-      end
-
-      a = x + -1; b = y +  2
-      if a < 7 && b < 7
-        if @board[a][b] == "x"
-          found = true
-          @route << [a,b]
-          break
-        end
-        @queue << [a,b]
-      end
-
-      a = x + -2; b = y +  1
-      if a < 7 && b < 7
-        if @board[a][b] == "x"
-          found = true
-          @route << [a,b]
-          break
-        end
-        @queue << [a,b]
+        @queue << new_node
       end
 
       @start = @queue.shift
       @route << @start
     end
     p @route
+  end
+
+
+  def possible_routes(x,y)
+
+      @routes = []
+      a = x +  2; b = y + -1; @routes << [a,b]  if a < 7 && b < 7
+      a = x +  1; b = y +  2; @routes << [a,b]  if a < 7 && b < 7
+      a = x +  2; b = y +  1; @routes << [a,b]  if a < 7 && b < 7
+      a = x + -1; b = y + -2; @routes << [a,b]  if a < 7 && b < 7
+      a = x + -2; b = y + -1; @routes << [a,b]  if a < 7 && b < 7
+      a = x + -1; b = y +  2; @routes << [a,b]  if a < 7 && b < 7
+      a = x + -2; b = y +  1; @routes << [a,b]  if a < 7 && b < 7
+  end
+
+  def print_winning_route(node)
+
   end
 
 
