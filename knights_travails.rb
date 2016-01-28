@@ -37,24 +37,26 @@ class KnightMoves
 
 
     loop do
-    x, y = @start[0], @start[1]
+    x, y = @current.value[0], @current.value[1]
     possible_routes(x,y)
 
-        new_node = Node.new([a, b], current)
+
+      @routes.each do |route|
+        new_node = Node.new([route[0], route[1]], current)
         current.child = new_node
 
-        if @board[a][b] == "x"
+        if @board[[route[0]][route[1]] == "x"
           print_winning_route(new_node)
           break
         end
+      end
 
         @queue << new_node
       end
 
-      @start = @queue.shift
-      @route << @start
+      @current = @queue.shift
     end
-    p @route
+
   end
 
 
