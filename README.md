@@ -17,6 +17,8 @@ The rest is responsible for receiving the user input and printing the results.
 You will end up checking all of the one step moves first, then all of the two steps moves etc.
 
 Once the correct board position is reached you will send the "winning" node to print_winning_route method. 
-The method checks the family tree of the node by looking for the parent of each node until the nil is found. If you found the solution in 4 steps it will look like this:
+The method checks the family tree of the node by looking for the parent of each node until the nil is found. If you found the solution in 4 steps it will look like this: 
+
 winning node(END) -> parent -> parent -> parent -> parent -> nil (START)
+
 The nil means you have reached the start of the search since only the starting node does not have a parent.
