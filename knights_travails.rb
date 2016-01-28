@@ -17,48 +17,53 @@ class KnightMoves
   end
 
   def user_input
-
+    puts "\e[H\e[2J"
     draw_the_board
-    puts "Enter starting position:\tFormat: A4"
+    puts "\t\t\t\tEnter starting position:\tFormat: A4"
 
     result = get_input
-    @start = [result.first, result.last]
+    @start = [result.last, result.first]
     @board[@start[0]][@start[1]] = 's'
+    puts "\e[H\e[2J"
     draw_the_board
 
 
-    puts "Enter target position:\tFormat: A4"
+    puts "\t\t\t\tEnter target position:\tFormat: A4"
     result = get_input
-    @target = [result.first, result.last]
+    @target = [result.last, result.first]
     @board[@target[0]][@target[1]] = 'f'
+    puts "\e[H\e[2J"
     draw_the_board
 
+    puts "\e[H\e[2J"
     knight_moves
   end
 
   def get_input
-    input = gets.upcase.chomp
+    print "\n\t\t\t\t"
+    input = gets.chomp
     until input.size == 2 && input[0].ord.between?(65,72) && input[1].to_i.between?(1,8)
-      puts "Incorrect input, try again"
-      input = gets.downcase.chomp
+      puts "\t\t\t\tIncorrect input, try again\n\t\t\t\t"
+      input = gets.chomp
     end
 
-    x = input[0].ord - 65
-    y = input[1].to_i - 1
-    [x,y]
+    letter = input[0].ord - 65
+    number = input[1].to_i - 1
+    [letter,number]
   end
 
   def draw_the_board
       @board.reverse.each_with_index do |row, i|
-        print (i-8).abs
+        print "\t\t\t\t #{(i-8).abs}"
         row.each { |x| print "|#{x}" }
         print "|\n"
     end
     letters = ('A'..'H').to_a.join(" ")
-    print "  #{letters}\n"
+    print "\t\t\t\t   #{letters}\n"
   end
 
   def knight_moves
+
     found = false
     @queue = []
 
@@ -119,8 +124,9 @@ class KnightMoves
     }
     string.strip!.gsub!(" "," -> ")
 
-    puts "You made it in #{@route.size - 1} moves!\nHere's your path: #{string}"
     draw_the_board
+    puts "\n\t\t\t\tYou made it in #{@route.size - 1} moves!\n\t\t\t\tHere's your path: #{string}\n\n"
+
   end
 
 end
