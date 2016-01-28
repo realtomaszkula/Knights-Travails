@@ -32,6 +32,8 @@ class KnightMoves
     @goal = [4,6]
     @board[@start[0]][@start[1]] = 's'
     @board[@goal[0]][@goal[1]] = 'f'
+    ## updating the board with start point and finish point
+
     @queue = []
 
     @current = Node.new()
@@ -77,13 +79,22 @@ class KnightMoves
       node = node.parent
     end
 
+    ## updating the board with mid steps
     @route.reverse!
     mid_steps = @route[1..-1]
     mid_steps.to_enum.with_index(1).each do |cords, i|
       @board[cords[0]][cords[1]] = i.to_s
     end
 
-    puts "Winning route: #{@route}, in #{@route.size - 1} steps."
+    ## converting route steps to readable form
+    string = ""
+    @route.each { |step|
+      p step
+      string << "#{(step[1]+65).chr}#{step[0]+1} "
+    }
+    string.strip!.gsub!(" "," -> ")
+
+    puts "Winning route, in #{@route.size - 1} steps: #{string}"
     draw_the_board
   end
 
