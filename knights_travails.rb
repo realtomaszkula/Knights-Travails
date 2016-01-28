@@ -31,45 +31,39 @@ class KnightMoves
     @goal = [2,2]
     @board[4][3] = 'o'
     @board[2][2] = 'x'
-
-    current = Node.new(@start)
     @queue = []
 
+    @current = Node.new()
+    @current.value = @start
 
     loop do
-    x, y = @current.value[0], @current.value[1]
-    possible_routes(x,y)
+      x, y = @current.value[0], @current.value[1]
+      possible_routes(x,y)
 
+        @routes.each do |route|
+          new_node = Node.new([route[0], route[1]], @current)
+          @current.child = new_node
 
-      @routes.each do |route|
-        new_node = Node.new([route[0], route[1]], current)
-        current.child = new_node
-
-        if @board[[route[0]][route[1]] == "x"
-          print_winning_route(new_node)
-          break
+            if @board[route[0]][route[1]] == "x"
+              print_winning_route(new_node)
+              break
+            end
+          @queue << new_node
         end
-      end
-
-        @queue << new_node
-      end
-
       @current = @queue.shift
     end
 
   end
 
-
   def possible_routes(x,y)
-
       @routes = []
-      a = x +  2; b = y + -1; @routes << [a,b]  if a < 7 && b < 7
-      a = x +  1; b = y +  2; @routes << [a,b]  if a < 7 && b < 7
-      a = x +  2; b = y +  1; @routes << [a,b]  if a < 7 && b < 7
-      a = x + -1; b = y + -2; @routes << [a,b]  if a < 7 && b < 7
-      a = x + -2; b = y + -1; @routes << [a,b]  if a < 7 && b < 7
-      a = x + -1; b = y +  2; @routes << [a,b]  if a < 7 && b < 7
-      a = x + -2; b = y +  1; @routes << [a,b]  if a < 7 && b < 7
+      a = x +  2; b = y + -1; @routes << [a,b]  if a.between?(0,7) && b.between?(0,7)
+      a = x +  1; b = y +  2; @routes << [a,b]  if a.between?(0,7) && b.between?(0,7)
+      a = x +  2; b = y +  1; @routes << [a,b]  if a.between?(0,7) && b.between?(0,7)
+      a = x + -1; b = y + -2; @routes << [a,b]  if a.between?(0,7) && b.between?(0,7)
+      a = x + -2; b = y + -1; @routes << [a,b]  if a.between?(0,7) && b.between?(0,7)
+      a = x + -1; b = y +  2; @routes << [a,b]  if a.between?(0,7) && b.between?(0,7)
+      a = x + -2; b = y +  1; @routes << [a,b]  if a.between?(0,7) && b.between?(0,7)
   end
 
   def print_winning_route(node)
@@ -81,10 +75,7 @@ class KnightMoves
     end
 
     puts "Winning route: #{@route}"
-
   end
-
-
 
 end
 

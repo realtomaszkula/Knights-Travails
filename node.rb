@@ -2,10 +2,10 @@ class Node
 
   attr_accessor :value, :child, :parent
 
-  def initialize(value, parent = nil, child = nil)
-    @value = parent
+  def initialize(value = nil, parent = nil, child = nil)
+    @value = value
     @parent = parent
-    @child = parent
+    @child = child
   end
 end
 
