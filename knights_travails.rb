@@ -1,4 +1,5 @@
 class KnightMoves
+  attr_accessor :board
 
   def initialize
     @board = [
@@ -23,19 +24,16 @@ class KnightMoves
     print "  #{letters}\n"
   end
 
-  def knight_moves(arr)
-
-    queue = []
-
-    move1[x+1][y-2]
-    move1[x+2][y-1]
-    move1[x+1][y+2]
-    move1[x+2][y+1]
-
-    move1[x-1][y-2]
-    move1[x-2][y-1]
-    move1[x-1][y+2]
-    move1[x-2][y+1]
+  def knight_moves
+    x, y = 3, 3
+    @board[x+1][y-2] = 'x'
+    @board[x+2][y-1] = 'x'
+    @board[x+1][y+2] = 'x'
+    @board[x+2][y+1] = 'x'
+    @board[x-1][y-2] = 'x'
+    @board[x-2][y-1] = 'x'
+    @board[x-1][y+2] = 'x'
+    @board[x-2][y+1] = 'x'
 
   end
 
@@ -48,6 +46,8 @@ goal = [5][5]
 
 
 game = KnightMoves.new
+game.draw_the_board
+game.knight_moves
 game.draw_the_board
 
 
