@@ -14,10 +14,6 @@ class KnightMoves
         ]
   end
 
-  def play
-
-  end
-
   def draw_the_board
       @board.each_with_index do |row, i|
         print (i-8).abs
@@ -31,12 +27,14 @@ class KnightMoves
   def knight_moves
     @start = [4,3]
     @goal = [2,2]
+
+    @board[4][3] = 'o'
     @board[2][2] = 'x'
 
-    queue = []
-    route = []
+    @queue = []
+    @route = []
 
-    route << @start
+    @route << @start
 
     loop do
     x, y = @start[0], @start[1]
@@ -45,69 +43,78 @@ class KnightMoves
       if a < 7 && b < 7
         if @board[a][b] == "x"
           found = true
+          @route << [a,b]
           break
         end
-        queue << [a,b]
+        @queue << [a,b]
       end
 
       a = x + 1; b = y +  2
       if a < 7 && b < 7
         if @board[a][b] == "x"
           found = true
+          @route << [a,b]
           break
         end
-        queue << [a,b]
+        @queue << [a,b]
       end
 
       a = x + 2; b = y +  1
       if a < 7 && b < 7
         if @board[a][b] == "x"
           found = true
+          @route << [a,b]
           break
         end
-        queue << [a,b]
+        @queue << [a,b]
       end
 
       a = x + -1; b = y + -2
       if a < 7 && b < 7
         if @board[a][b] == "x"
           found = true
+          @route << [a,b]
           break
         end
-        queue << [a,b]
+        @queue << [a,b]
       end
 
       a = x + -2; b = y + -1
       if a < 7 && b < 7
         if @board[a][b] == "x"
           found = true
+          @route << [a,b]
           break
         end
-        queue << [a,b]
+        @queue << [a,b]
       end
 
       a = x + -1; b = y +  2
       if a < 7 && b < 7
         if @board[a][b] == "x"
           found = true
+          @route << [a,b]
           break
         end
-        queue << [a,b]
+        @queue << [a,b]
       end
 
       a = x + -2; b = y +  1
       if a < 7 && b < 7
         if @board[a][b] == "x"
           found = true
+          @route << [a,b]
           break
         end
-        queue << [a,b]
+        @queue << [a,b]
       end
+
+      @start = @queue.shift
     end
-
-    route << @goal
-
+    # @route << @goal
+    p @route
   end
+
 
 
 end
