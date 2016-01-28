@@ -21,4 +21,4 @@ The method checks the family tree of the node by looking for the parent of each 
 
 winning node(END) -> parent -> parent -> parent -> parent -> nil (START)
 
-The nil means you have reached the start of the search since only the starting node does not have a parent.
+The nil means you have reached the start of the search since only the starting node does not have a parent. Every parent is one step that the knight took towards the final position.
