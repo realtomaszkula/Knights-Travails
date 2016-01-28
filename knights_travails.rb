@@ -73,6 +73,14 @@ class KnightMoves
   end
 
   def print_winning_route(node)
+    @route = []
+    loop do
+      @route << node.value
+      break if node.parent == nil
+      node = node.parent
+    end
+
+    puts "Winning route: #{@route}"
 
   end
 
