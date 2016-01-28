@@ -14,6 +14,10 @@ class KnightMoves
         ]
   end
 
+  def play
+
+  end
+
   def draw_the_board
       @board.each_with_index do |row, i|
         print (i-8).abs
@@ -25,24 +29,42 @@ class KnightMoves
   end
 
   def knight_moves
-    x, y = 3, 3
-    @board[x+1][y-2] = 'x'
-    @board[x+2][y-1] = 'x'
-    @board[x+1][y+2] = 'x'
-    @board[x+2][y+1] = 'x'
-    @board[x-1][y-2] = 'x'
-    @board[x-2][y-1] = 'x'
-    @board[x-1][y+2] = 'x'
-    @board[x-2][y+1] = 'x'
+    @start = [4,3]
+    @goal = [2,2]
+    @board[2][2] = 'x'
 
+    queue = []
+    step_seq = []
+
+      # found if @board[x][y] == 'x'
+      # queue << [x, y]
+
+  end
+
+  def possible_moves
+    x, y = @start[0], @start[1]
+    @moves = []
+
+    x += 2; y -= -1
+      moves << [x,y] if x < 7 && y < 7
+    x +=  1; y -=  2
+      moves << [x,y] if x < 7 && y < 7
+    x +=  2; y -=  1
+      moves << [x,y] if x < 7 && y < 7
+    x += -1; y -= -2
+      moves << [x,y] if x < 7 && y < 7
+    x += -2; y -= -1
+      moves << [x,y] if x < 7 && y < 7
+    x += -1; y -=  2
+      moves << [x,y] if x < 7 && y < 7
+    x += -2; y -=  1
+      moves << [x,y] if x < 7 && y < 7
   end
 
 end
 
 
 
-start = [3][3]
-goal = [5][5]
 
 
 game = KnightMoves.new
