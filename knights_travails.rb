@@ -1,3 +1,5 @@
+require_relative './node.rb'
+
 class KnightMoves
   attr_accessor :board
 
@@ -110,8 +112,8 @@ class KnightMoves
       end
 
       @start = @queue.shift
+      @route << @start
     end
-    # @route << @goal
     p @route
   end
 
