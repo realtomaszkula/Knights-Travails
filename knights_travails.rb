@@ -66,7 +66,6 @@ class KnightMoves
 
     found = false
     @queue = []
-
     @current = Node.new()
     @current.value = @start
 
@@ -104,6 +103,8 @@ class KnightMoves
 
   def print_winning_route(node)
     @route = []
+
+    ## collecting the parents of the winning node
     loop do
       @route << node.value
       break if node.parent == nil
